@@ -14,7 +14,7 @@ export class CarService {
   ) {}
 
   getCars(): Promise<Car[]> {
-    return this.carsRepository.find();
+    return this.carsRepository.find({order: {id: "DESC"}});
   }
   
   getCar(id: number): Promise<Car | null> {
