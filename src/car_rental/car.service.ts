@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Car } from 'src/models/car.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cars } from 'src/entities/cars.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { UpdateResult } from 'typeorm/browser';
+import { SearchModel } from 'src/models/search.model';
 
 @Injectable()
 export class CarService {
@@ -33,9 +34,26 @@ export class CarService {
     return this.carsRepository.update(id, dataCar);
   }
   
-  searchCars(data: {brand: string}): Promise<Car[]> {
-    return this.carsRepository.find({where: {
-      brand: data.brand
-    }});
+  searchCars(data: SearchModel): Promise<Car[]> {
+    
+    let column: string;
+
+    let where: Record<string, any> = {};
+
+    if(data.column == 'brand') {
+        where = {brand: ILike(`${data.searchText}%`)};
+      } else if(data.column == 'model') {
+        where = {model: ILike(`${data.searchText}%`)};
+      } else {
+        where = {price: ILike(`${data.searchText}%`)};
+    }
+    
+    return this.carsRepository.find({
+
+        where
+      
+    });
   }
+
+
 }

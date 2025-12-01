@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from 
 import { CarService } from './car.service';
 import { Car } from 'src/models/car.model';
 import { UpdateResult } from 'typeorm';
+import { SearchModel } from 'src/models/search.model';
 
 @Controller('car')
 export class CarController {
@@ -33,8 +34,13 @@ export class CarController {
   }
   
    // search cars
+  // @Post('search')
+  // searchCars(@Body() data: {brand: string}): Promise<Car[]> {
+  //   return this.carService.searchCars(data);
+  // }
+  
   @Post('search')
-  searchCars(@Body() data: {brand: string}): Promise<Car[]> {
+  searchCars(@Body() data: SearchModel): Promise<Car[]> {
     return this.carService.searchCars(data);
   }
   
