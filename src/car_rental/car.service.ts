@@ -34,9 +34,11 @@ export class CarService {
     return this.carsRepository.update(id, dataCar);
   }
   
+  updateCarStatus(id: number, dataCar: Car): Promise<UpdateResult> {
+    return this.carsRepository.update(id, dataCar);
+  }
+  
   searchCars(data: SearchModel): Promise<Car[]> {
-    
-    let column: string;
 
     let where: Record<string, any> = {};
 
@@ -49,9 +51,7 @@ export class CarService {
     }
     
     return this.carsRepository.find({
-
-        where
-      
+        where 
     });
   }
 

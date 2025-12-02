@@ -14,4 +14,7 @@ export class Cars {
 
   @Column()
   price: number;
+  
+  @Column()
+  is_rented: number;
 }

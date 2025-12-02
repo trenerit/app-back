@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
 import { CarService } from './car.service';
 import { Car } from 'src/models/car.model';
 import { UpdateResult } from 'typeorm';
@@ -33,11 +33,10 @@ export class CarController {
     return this.carService.updateCar(id, data);
   }
   
-   // search cars
-  // @Post('search')
-  // searchCars(@Body() data: {brand: string}): Promise<Car[]> {
-  //   return this.carService.searchCars(data);
-  // }
+  @Put(':id')
+  updateCarStatus(@Param('id') id: number, @Body() data: Car): Promise<UpdateResult> {
+    return this.carService.updateCarStatus(id, data);
+  }
   
   @Post('search')
   searchCars(@Body() data: SearchModel): Promise<Car[]> {
