@@ -4,10 +4,13 @@ import { AppService } from './app.service';
 import { Cars } from './entities/cars.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CarModule } from './car_rental/car.module';
+import { Users } from './entities/users.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     CarModule,
+    UserModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -15,7 +18,7 @@ import { CarModule } from './car_rental/car.module';
       username: 'root',
       password: '',
       database: 'car_rental',
-      entities: [Cars]
+      entities: [Cars, Users]
     }),
   ],
   controllers: [AppController],
