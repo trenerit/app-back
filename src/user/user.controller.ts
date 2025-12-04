@@ -18,6 +18,11 @@ export class UserController {
     return this.userService.getUser(id);
   }
   
+  @Post('/login')
+  getUserLogin(@Body() data: {login: string, pass: string}): Promise<User[] | null> {
+    return this.userService.getUserLogin(data);
+  }
+  
   // @Delete(':id')
   // delCar(@Param('id') id: number): void {
   //   return this.carService.delCar(id);
