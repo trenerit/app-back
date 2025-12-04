@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
-import { UpdateResult } from 'typeorm';
 import { UserService } from './user.service';
 import { User } from 'src/models/user.model';
 
