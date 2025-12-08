@@ -13,17 +13,23 @@ export class AuthService {
     async validateUser(login: string, userPass: string) {
         const user = await this.usersService.getUserLogin(login);
 
+        console.log('tu',user?.pass);
+
         if(!user) {
             throw new UnauthorizedException('Nieprawidłowe dane logowania');
         }
         
-        const passwdValid = createHash('sha1').update(userPass).digest('hex');
+        const passwdValid: string = createHash('sha1').update(userPass).digest('hex');
+
+        console.log(user.pass, passwdValid);
         
-        if(userPass != passwdValid) {
+        if(user.pass != passwdValid) {
             throw new UnauthorizedException('Nieprawidłowe dane logowania2');
         }
 
         const {pass, ...result} = user;
+
+        return result;
     }
 
     async login(user: any) {

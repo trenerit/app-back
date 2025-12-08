@@ -21,18 +21,20 @@ export class UserService {
     return this.usersRepository.findOneBy({id});
   }
   
-  getUserLogin(login: string): Promise<User | null > {
+  async getUserLogin(login: string): Promise<User | null > {
     
     // const passwordSha1 = createHash('sha1').update(data.pass).digest('hex');
 
-    return this.usersRepository.findOne({
+    const result = await this.usersRepository.findOneBy({
       // select: {
       //   id: true,
       //   login: true
       // },
-      where: {
+      
         login
-      }
+      
     });
+    console.log(result);
+    return result;
   }
 }
