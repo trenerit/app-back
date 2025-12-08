@@ -18,8 +18,8 @@ export class UserController {
   }
   
   @Post('/login')
-  getUserLogin(@Body() data: {login: string, pass: string}): Promise<User[] | null> {
-    return this.userService.getUserLogin(data);
+  getUserLogin(@Body() data: {login: string, pass: string}): Promise<User | null> {
+    return this.userService.getUserLogin(data?.login);
   }
   
   // @Delete(':id')
