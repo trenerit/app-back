@@ -11,7 +11,7 @@ constructor(private readonly authService: AuthService) {}
 @Post('login')
 async login(@Body() body: LoginDto) {
     
-    const user = await this.authService.validateUser(body.login, body.password);
+    const user = await this.authService.validateUser(body.login, body.password, body.role);
     return this.authService.login(user);
 }
 
