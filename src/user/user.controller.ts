@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from 'src/models/user.model';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
 @Controller('user')
@@ -8,11 +9,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   getUsers(): Promise<User[]> {
     return this.userService.getUsers();
   }
   
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   getUser(@Param('id') id: number): Promise<User | null> {
     return this.userService.getUser(id);
   }

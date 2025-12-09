@@ -15,8 +15,8 @@ async login(@Body() body: LoginDto) {
     return this.authService.login(user);
 }
 
-@UseGuards(JwtAuthGuard)
 @Get('user')
+@UseGuards(JwtAuthGuard)
 getProfile(@Req() req: any) {
     return req.user;
 }
