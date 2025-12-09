@@ -7,6 +7,7 @@ import { CarModule } from './car_rental/car.module';
 import { Users } from './entities/users.entity';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -22,6 +23,9 @@ import { AuthModule } from './auth/auth.module';
       entities: [Cars, Users]
     }),
     AuthModule,
+    ConfigModule.forRoot({
+      isGlobal: true
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
