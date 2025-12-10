@@ -25,11 +25,11 @@ export class JwtConfigService implements JwtOptionsFactory {
 
   // prosta metoda dla expiresIn
   getExpiresIn(): number {
-    return this.configService.get<number>('JWT_EXPIRES_IN') ?? 3600;
+    return this.configService.get<any>('JWT_EXPIRES_IN');
   }
 
   // jeżeli chcesz mieć ogólnego get'a do innych rzeczy:
-  get(key: string, defaultValue?: any): any {
-    return this.configService.get(key, defaultValue);
-  }
+//   get(key: string, defaultValue?: any): any {
+//     return this.configService.get(key, defaultValue);
+//   }
 }
